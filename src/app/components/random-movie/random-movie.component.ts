@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { DUMMY_MOVIES } from '../../data/dummy-movies';
-
+import { ButtonComponent } from '../button/button.component';
  const randomIdx = Math.floor(Math.random() * DUMMY_MOVIES.length)
   console.log(randomIdx)
 @Component({
   selector: 'app-random-movie',
   standalone: true,
-  imports: [],
+  imports: [ButtonComponent],
   templateUrl: './random-movie.component.html',
   styleUrl: './random-movie.component.scss'
 })

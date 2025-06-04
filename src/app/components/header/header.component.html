@@ -1,4 +1,4 @@
 <header class="container d-flex justify-content-between bg-primary ">
     <img [src]="imagePath">
-    <button (click)="onUserClick()">Ciao {{ username }}</button>
+    <app-button (btnClicked)="onUserClick()" [title]="this.isClicked ? 'Ciao Matteo' : 'Login' " />
 </header>

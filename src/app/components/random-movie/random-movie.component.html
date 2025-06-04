@@ -1,6 +1,6 @@
-<div>
+<div >
     <img src="">
     <h2>{{ movie.title }}</h2>
     <p>{{ movie.overview }}</p>
-    <button (click)="onGetRandomMovie()">Mostra un altro film</button>
+    <app-button (btnClicked)="onGetRandomMovie()" title="Mostrami un altro film" />
 </div>

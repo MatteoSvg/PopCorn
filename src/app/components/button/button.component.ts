@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ɵINPUT_SIGNAL_BRAND_WRITE_TYPE } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -9,8 +9,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ButtonComponent {
     @Input({required: true}) title!: string
-
+    @Input() isSecondary: boolean = false
     @Output() btnClicked = new EventEmitter<void>()
+
+    get btnStyle(){
+      return this.isSecondary ? 'btn-secondary' : 'btn-primary'
+    }
+
     onBtnClicked(){
       this.btnClicked.emit()
     }

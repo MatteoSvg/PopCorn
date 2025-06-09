@@ -19,4 +19,8 @@ export class RandomMovieComponent {
     this.movie = DUMMY_MOVIES[randomIdx]
   }
 
+  getPosterPath() {
+    return 'https://image.tmdb.org/t/p/w500/' + this.movie.poster_path
+  }
+
 }

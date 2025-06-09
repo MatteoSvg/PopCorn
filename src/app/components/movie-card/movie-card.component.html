@@ -1,9 +1,9 @@
-<div [id]="movie.id" class="card" style="height: 50rem;">
+<div [id]="movie.id" class="card">
   <img [src]="posterPath" class="card-img-top" />
   <div class="card-body">
     <h3 class="card-title">{{ movie.title }}</h3>
     @if (movie.overview) {
-    <p class="card-text fs-6">{{ movie.overview }}</p>
+    <p class="card-text">{{ movie.overview }}</p>
     }
     <app-popcorn-rating [rating]="movie.vote_average" />
   </div>

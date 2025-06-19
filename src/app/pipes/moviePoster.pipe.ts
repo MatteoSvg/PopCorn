@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Movie } from '../models/movie.model';
 
+//le pipe servono ad elaborare e trasformare dei dati
 @Pipe({
   name: 'moviePoster',
   standalone: true,

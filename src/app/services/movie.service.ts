@@ -19,12 +19,12 @@ export class MovieService {
     );
   }
 
-  getCurrentMovie(id: number): Movie | undefined {
-    return this.movies.find((movie) => movie.id === id) || undefined;
+  getCurrentMovie(id: number): Observable<Movie> {
+    return this.apiService.getData<Movie>(`movie/${id}?language=it-IT&page=1`)
   }
   // UTILS
   getPosterPath(movie: Movie): string {
-    return 'https://image.tmdb.org/t/p/w500' + movie.poster_path;
+    return 'https://image.tmdb.org/t/p/w500' + movie.poster_path
   }
 
   getPosterAlt(movie: Movie): string {

@@ -1,11 +1,37 @@
-<a [routerLink]="['/movies', movie.id]"  [id]="movie.id" class="card text-decoration-none  h-100 ">
-  <img [src]="movie | moviePoster" [alt]="movie | movieAlt" class="card-img-top">
+<a
+  [routerLink]="['/movies', movie.id]"
+  [id]="movie.id"
+  class="card text-decoration-none h-100"
+>
+
+  @if (type === 'horizontal') {
+
+  <div class="card mb-3" style="max-width: 540px">
+    <div class="row g-0 h-100">
+      <div class="col-md-4 h-100">
+        <img
+          [src]="movie | moviePoster"
+          [alt]="movie | movieAlt"
+          class="card-img-top"
+        />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ movie.title }}</h5>
+          @if (movie.overview) {
+          <p class="card-text multiline-truncate">{{ movie.overview }}</p>
+
+          }
+          <app-popcorn-rating [rating]="movie.vote_average" class="mt-auto" />
+        </div>
+      </div>
+    </div>
+  </div>
+  } @else {
   <div class="card-body d-flex flex-column">
     <h3 class="card-title">{{ movie.title }}</h3>
-    @if (movie.overview) {
-      <p class="card-text multiline-truncate"> {{movie.overview}} </p>
-    }
 
     <app-popcorn-rating [rating]="movie.vote_average" class="mt-auto" />
   </div>
+  }
 </a>

@@ -1,3 +1,4 @@
+<div #loader class="loader">Loading...</div>
 @if (movie) {
 <div [id]="movie.id" class="container my-5">
   <div class="row">
@@ -6,6 +7,13 @@
     </div>
     <div class="col-12 col-md-6">
       <h1>{{movie.title}}</h1>
+      <app-popcorn-rating [rating]="movie.vote_average" />
+      <p>{{movie.overview}}</p>
+      <p>Genere: {{MovieGenre}}</p>
+      <p>Anno di produzione: {{movie.release_date?.slice(0,4)}}</p>
+      <p>Data di uscita: {{movie.release_date}}</p>
+      <p>Lingua originale: {{movie.original_language}}</p>
+      <p>Titolo originale: {{movie.original_title}}</p>
     </div>
   </div>
 </div>

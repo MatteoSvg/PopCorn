@@ -4,7 +4,7 @@
     <div class="col-12 col-md-8 d-flex flex-column">
       <h2 class="mt-auto">{{ movie.title }}</h2>
       <p>{{ movie.overview }}</p>
-      <a class="link-primary fw-bold text-decoration-none ">👉​ Vai a scheda</a>
+      <a class="link-primary fw-bold text-decoration-none " [routerLink]="['/movies', movie.id]">👉​ Vai a scheda</a>
       <app-button class="mt-auto text-end" (btnClicked)="onGetRandomMovie()" title="Mostrami un altro film" />
     </div>
   </div>

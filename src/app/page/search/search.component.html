@@ -1,11 +1,14 @@
 <div class="filters container my-5">
-  <form #form="ngForm" class="row g-3 align-items-end">
+  <form #form="ngForm" class="row g-3 align-items-end" (ngSubmit)="onSubmit(form)">
     <!-- Campo di ricerca -->
     <div class="col-md-5">
       <label for="search" class="form-label">Cerca film</label>
       <input type="text" id="search" class="form-control" placeholder="Titolo del film" name="search" required
         minlength="3" ngModel #search="ngModel" />
     </div>
+    @if (search.touched && search.invalid) {
+      <p>Il campo è obbligatorio</p>
+    } 
 
     <!-- Select Anno -->
     <div class="col-md-2">
@@ -49,8 +52,13 @@
 
   </form>
 </div>
-<div class="container">
+<div class="container my-3">
   @if (movies.length > 0) {
-  <app-movie-list [movies]="movies" />
+      <div class="row">
+        @for (movie of movies; track movie.id) {
+            <div class="col-6 col-lg-4 mb-3"><app-movie-card [movie]="movie" type="horizontal" /></div>
+        }
+
+      </div>
   }
 </div>

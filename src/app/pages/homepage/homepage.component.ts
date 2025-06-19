@@ -1,24 +1,38 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  afterNextRender,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { ActorListComponent } from '../../components/actor-list/actor-list.component';
 import { MovieListComponent } from '../../components/movie-list/movie-list.component';
 import { RandomMovieComponent } from '../../components/random-movie/random-movie.component';
-
-import { DUMMY_ACTORS } from '../../data/dummy-actors';
 import { Movie } from '../../models/movie.model';
 import { ActorService } from '../../services/actor.service';
 import { MovieService } from '../../services/movie.service';
-
+import { ButtonComponent } from '../../components/button/button.component';
+import { Actor } from '../../models/actor.model';
+import { ActivatedRoute } from '@angular/router';
+import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [RandomMovieComponent, MovieListComponent, ActorListComponent],
+  imports: [
+    RandomMovieComponent,
+    MovieListComponent,
+    ActorListComponent,
+    ButtonComponent,
+    MovieCardComponent
+  ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
 })
 export class HomepageComponent implements OnInit {
   movies: Movie[] = [];
+  fourMovies: Movie[] = [];
   isFetching: boolean = false;
-  actors = DUMMY_ACTORS;
+  actors: Actor[] = [];
   private actorService = inject(ActorService);
   private movieService = inject(MovieService);
   ngOnInit(): void {
@@ -30,6 +44,7 @@ export class HomepageComponent implements OnInit {
           return;
         }
         this.movies = movies.results;
+        this.bestFourMovies();
       },
       complete: () => {
         this.isFetching = false;
@@ -39,11 +54,27 @@ export class HomepageComponent implements OnInit {
         this.movies = [];
       },
     });
+    this.actorService.getActors().subscribe({
+      next: (actors) => {
+        if (!actors) return;
+        this.actors = actors.results
+          .map((actor) => this.actorService.normalize(actor))
+          .sort((a, b) => b.popularity - a.popularity)
+          .slice(0, 4);
+      },
+    });
   }
 
-  get bestFourMovies() {
-    return [...this.movies]
+  bestFourMovies() {
+    console.log('clicked');
+    this.fourMovies = [...this.movies]
       .sort((a, b) => (b.vote_average ?? 0) - (a.vote_average ?? 0))
+      .slice(0, 4);
+  }
+  worstFourMovies() {
+    console.log('clicked');
+    return [...this.movies]
+      .sort((a, b) => (a.vote_average ?? 0) - (b.vote_average ?? 0))
       .slice(0, 4);
   }
 

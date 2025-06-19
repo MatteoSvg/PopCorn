@@ -1,3 +1,6 @@
 <app-random-movie />
-<app-movie-list [movies]="bestFourMovies" title="Top 4 film della settimana" />
+<app-movie-list [movies]="fourMovies" title="Top 4 film della settimana" />
 <app-actor-list [actors]="bestFourActors" title="Top 4 attori del mese" />
+<app-button (btnClicked)="bestFourMovies()" title="Migliori 4" />
+<app-button (btnClicked)="worstFourMovies()" title="Peggiori 4" />
+<app-movie-card [movie]="movies[0]" type="horizontal"/>

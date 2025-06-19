@@ -16,6 +16,7 @@ import { PopcornRatingComponent } from '../popcorn-rating/popcorn-rating.compone
 export class MovieCardComponent {
   public movieService = inject(MovieService);
   @Input({ required: true }) movie!: Movie;
+  @Input() type: 'default' | 'horizontal' = 'default'
 
   // Sostituiti con pipes
   // get posterPath() {
